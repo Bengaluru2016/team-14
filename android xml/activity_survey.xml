@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/first"
             android:layout_weight="0.03"
-            android:hint="First and last name" />
+            android:hint="Name" />
 
         <EditText
             android:layout_width="match_parent"
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/address"
-            android:hint="Native Address"/>
+            android:hint="Address"/>
 
         <EditText
             android:layout_width="match_parent"

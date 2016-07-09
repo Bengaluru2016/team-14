@@ -34,7 +34,7 @@ public class StudentActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             String type= params[0];
-            String login_url = "http://ec2-54-169-131-166.ap-southeast-1.compute.amazonaws.com/update_progress.php";
+            String login_url = "http://ec2-54-169-131-166.ap-southeast-1.compute.amazonaws.com/reg_student.php";
             if(type.equals("stureg")){
                 try {
                     String id= params[1];
@@ -51,9 +51,9 @@ public class StudentActivity extends AppCompatActivity {
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
                     String postdata= URLEncoder.encode("sid","UTF-8")+"="+URLEncoder.encode(id,"UTF-8")+"&"
-                            +URLEncoder.encode("class","UTF-8")+"="+URLEncoder.encode(type1,"UTF-8")
-                            +"&"+URLEncoder.encode("attendance","UTF-8")+"="+URLEncoder.encode(city,"UTF-8")+"&"
-                            +URLEncoder.encode("performance","UTF-8")+"="+URLEncoder.encode(school,"UTF-8")+"&"
+                            +URLEncoder.encode("schoolname","UTF-8")+"="+URLEncoder.encode(type1,"UTF-8")
+                            +"&"+URLEncoder.encode("city","UTF-8")+"="+URLEncoder.encode(city,"UTF-8")+"&"
+                            +URLEncoder.encode("schooltype","UTF-8")+"="+URLEncoder.encode(school,"UTF-8")+"&"
                             ;
 
 
