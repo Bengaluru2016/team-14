@@ -9,8 +9,8 @@
     'Body'  =>  $body, //Incase you are wondering who Dr. Rajasekhar is http://en.wikipedia.org/wiki/Dr._Rajasekhar_(actor)
 );
  
-$exotel_sid = "jpmc51"; // Your Exotel SID - Get it from here: http://my.exotel.in/Exotel/settings/site#api-settings
-$exotel_token = "02188acb7c5c6251fab8c4c452f5c584e24e368d"; // Your exotel token - Get it from here: http://my.exotel.in/Exotel/settings/site#api-settings
+$exotel_sid = "jpmc52"; // Your Exotel SID - Get it from here: http://my.exotel.in/Exotel/settings/site#api-settings
+$exotel_token = "20eaabc5b83d237a84a26557d194fa9253615b30"; // Your exotel token - Get it from here: http://my.exotel.in/Exotel/settings/site#api-settings
  
 $url = "https://".$exotel_sid.":".$exotel_token."@twilix.exotel.in/v1/Accounts/".$exotel_sid."/Sms/send";
  
@@ -31,7 +31,6 @@ curl_close($ch);
  
 print "Response = ".print_r($http_result);
 
-  }
-  usersms('7382694782','kjbdfk');
-
+}
+usersms('9160791337','game of th');
 ?>
