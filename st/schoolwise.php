@@ -1,39 +1,34 @@
-<!DOCTYPE html>
-<html lang = "en">
-   
-   <head>
-      <meta charset = "utf-8">
-      <meta http-equiv = "X-UA-Compatible" content = "IE = edge">
-      <meta name = "viewport" content = "width = device-width, initial-scale = 1">
-      <title>Samridhdhi Trust</title>
-      <link href="signin.css" rel="stylesheet">
-	  <link href="css/bootstrap.min.css" rel="stylesheet">
-     
-   </head>
-   
-   <body>
-     
-	  <div class="container">
+<?php
+ ob_start();
+  include("conn.php");
+  
+  
+  
+  $checklogin = mysql_query("select * from schoolwise") or die(mysql_error());
+
+  $count  = mysql_num_rows($checklogin);
+  
+ 
+  if($count>0)
+  {
+	   echo "<strong>" . "schoolname". " " ."schoolcity". " " . "schooltype". " " . "Total_students". " " . "Average_Performance". " " . "Average_Attendance". " " . "Age"." </strong> <br> ";
+     	
+    while($row = $result->fetch_assoc()) {
+         echo "<br>" . $row["schoolname"]. " " . $row["schoolcity"]. " " . $row["schooltype"]. " " . $row["Total_students"]. " " . $row["Average_Performance"]. " " . $row["Average_Attendance"]. " " . $row["Age"];
+     	
+	}
 		
-     <form class="signin"  action="login.php" method=POST>
-        <h2 class="form-signin-heading">Sign in</h2>
-        <label for="text" class="sr-only">Username</label>
-        <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" class="form-control" placeholder="Password" required>
-       
-          
-		  
-        
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Log-in</button>
-		<label>
-			<p> Contact technical team for Login issues.</p>
-        </label>     
-	 </form>
-	  
-		
-    </div> 
-      
-    
-   </body>
-</html>
+  }
+  else
+  {
+	$message = "No Records found";
+	echo $message;
+	session_unset(); 
+	session_destroy();
+	//echo "<script type='text/javascript'>alert('$message');</script>";
+	//sleep(3);
+    //header('Location:loginerror.html');
+  }
+  
+ ob_end_flush();
+?>
