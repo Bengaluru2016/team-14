@@ -14,6 +14,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -30,12 +33,17 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class SurveyActivity extends AppCompatActivity {
+public class SurveyActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
     EditText e1,e2,e3,e4,e5,e6,e7;
     ImageView iv;
     Button sub,p;
     protected Bitmap yourbitmap;
     AlertDialog alertDialog;
+    RadioButton rdbMale, rdbFemale;
+    RadioGroup rgGender;
+    String gender;
+
+
     private static final int CAMERA_PIC_REQUEST = 1111;
     private static final int RESULT_LOAD_IMAGE = 1;
     public class Background1 extends AsyncTask<String,Void,String> {
@@ -47,7 +55,7 @@ public class SurveyActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             String type= params[0];
-            String login_url = "http://ec2-54-169-131-166.ap-southeast-1.compute.amazonaws.com/update_progress.php";
+            String login_url = "http://ec2-54-169-131-166.ap-southeast-1.compute.amazonaws.com/submit_survey.php";
             if(type.equals("survey")){
                 try {
                     String fir= params[1];
@@ -67,13 +75,13 @@ public class SurveyActivity extends AppCompatActivity {
                     OutputStream outputStream = httpURLConnection.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
-                    String postdata= URLEncoder.encode("sid","UTF-8")+"="+URLEncoder.encode(fir,"UTF-8")+"&"
-                            +URLEncoder.encode("class","UTF-8")+"="+URLEncoder.encode(lang,"UTF-8")
-                            +"&"+URLEncoder.encode("attendance","UTF-8")+"="+URLEncoder.encode(add,"UTF-8")+"&"
-                            +URLEncoder.encode("performance","UTF-8")+"="+URLEncoder.encode(occ,"UTF-8")+"&"
-                            +URLEncoder.encode("performance","UTF-8")+"="+URLEncoder.encode(phone,"UTF-8")+"&"
-                            +URLEncoder.encode("performance","UTF-8")+"="+URLEncoder.encode(age,"UTF-8")+"&"
-                            +URLEncoder.encode("performance","UTF-8")+"="+URLEncoder.encode(sex,"UTF-8");
+                    String postdata= URLEncoder.encode("name","UTF-8")+"="+URLEncoder.encode(fir,"UTF-8")
+                            +"&"+URLEncoder.encode("age","UTF-8")+"="+URLEncoder.encode(age,"UTF-8")+"&"
+                            +URLEncoder.encode("language","UTF-8")+"="+URLEncoder.encode(lang,"UTF-8")+"&"
+                            +URLEncoder.encode("occ","UTF-8")+"="+URLEncoder.encode(occ,"UTF-8")+"&"
+                            +URLEncoder.encode("mobile","UTF-8")+"="+URLEncoder.encode(phone,"UTF-8")+"&"
+                            +URLEncoder.encode("gender","UTF-8")+"="+URLEncoder.encode(sex,"UTF-8")+"&"
+                            +URLEncoder.encode("addr","UTF-8")+"="+URLEncoder.encode(add,"UTF-8");
 
 
                     bufferedWriter.write(postdata);
@@ -108,14 +116,14 @@ public class SurveyActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             alertDialog=new AlertDialog.Builder(context).create();
-            alertDialog.setTitle("Survey Status");
+            alertDialog.setTitle("Your SID is");
 
         }
 
 
         @Override
         protected void onPostExecute(String aVoid) {
-            alertDialog.setMessage(aVoid);
+            alertDialog.setMessage("\t"+aVoid);
             alertDialog.show();
         }
 
@@ -134,7 +142,10 @@ public class SurveyActivity extends AppCompatActivity {
         e4=(EditText)findViewById(R.id.occupation);
         e5=(EditText)findViewById(R.id.phone);
         e6=(EditText)findViewById(R.id.age);
-        e7=(EditText)findViewById(R.id.sex);
+        rgGender = (RadioGroup) findViewById(R.id.rgGender);
+        rdbMale = (RadioButton) findViewById(R.id.rdbMale);
+        rdbFemale = (RadioButton) findViewById(R.id.rdbMale);
+
         iv=(ImageView)findViewById(R.id.imageView);
         iv.setImageResource(R.drawable.no_user);
         iv.setOnClickListener(new View.OnClickListener() {
@@ -145,6 +156,22 @@ public class SurveyActivity extends AppCompatActivity {
                 // selectImage();
             }
         });
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int position) {
+        // TODO Auto-generated method stub
+        switch (position) {
+            case R.id.rdbMale:
+                gender = "true";
+                break;
+            case R.id.rdbFemale:
+                gender = "false";
+                break;
+
+            default:
+                break;
+        }
     }
     public void photo(View view) {
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
@@ -174,17 +201,16 @@ public class SurveyActivity extends AppCompatActivity {
         String occ=e4.getText().toString();
         String phone=e5.getText().toString();
         String age=e6.getText().toString();
-        String sex=e7.getText().toString();
-        first="\""+first+"\"";
+                first="\""+first+"\"";
         lang="\""+lang+"\"";
         add="\""+add+"\"";
         occ="\""+occ+"\"";
         phone="\""+phone+"\"";
         age="\""+age+"\"";
-        sex="\""+sex+"\"";
+        gender="\""+gender+"\"";
         String type="survey";
         Background1 bg1 = new Background1(this);
-        bg1.execute(type,first,lang,add,occ,phone,age,sex);
+        bg1.execute(type,first,lang,add,occ,phone,age,gender);
 
     }
 }

@@ -25,4 +25,5 @@ public class InputActivity extends AppCompatActivity {
     {
         startActivity(new Intent(this,TeacherActivity.class));
     }
+    public void Missing(View view) {startActivity(new Intent(this,MissingActivity.class));}
 }
