@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -17,29 +18,38 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
-public class RegisterActivity extends AppCompatActivity {
-    EditText e1,e2,e3,e4,e5;
-int a;
+public class LoginActivity extends AppCompatActivity {
+    EditText u,p;
+    Button lb;
+    int a,i=0;
+    ArrayList<String> result;
+    AlertDialog alertDialog;
     public class Background1 extends AsyncTask<String,Void,String> {
         Context context;
-        AlertDialog alertDialog;
+
         Background1 (Context ctx){
             context = ctx;
         }
         @Override
         protected String doInBackground(String... params) {
             String type= params[0];
-            String login_url = "http://10.0.2.2/login.php";
+            String login_url = "http://ec2-54-169-131-166.ap-southeast-1.compute.amazonaws.com/user_type.php";
             String reg_url = "http://10.0.2.2/register.php";
+            String src_url = "http://10.0.2.2/search.php";
             if(type.equals("login")){
                 try {
                     String username= params[1];
                     String password= params[2];
+                    /*String[] params = new String[]{"username","password"};
+                    String[] val = new String[]{username,password};*/
+
                     URL url = new URL(login_url);
                     HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                     httpURLConnection.setRequestMethod("POST");
@@ -47,8 +57,11 @@ int a;
                     httpURLConnection.setDoInput(true);
                     OutputStream outputStream = httpURLConnection.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
                     String postdata= URLEncoder.encode("username","UTF-8")+"="+URLEncoder.encode(username,"UTF-8")+"&"
-                            +URLEncoder.encode("password","UTF-8")+"="+URLEncoder.encode(password,"UTF-8");
+                            +URLEncoder.encode("pwd","UTF-8")+"="+URLEncoder.encode(password,"UTF-8");
+
+
                     bufferedWriter.write(postdata);
                     bufferedWriter.flush();
                     bufferedWriter.close();
@@ -61,7 +74,7 @@ int a;
                     {
                         result +=line;
                     }
-                    a=Integer.parseInt(result);
+//                    a=Integer.parseInt(result);
 
                     bufferedReader.close();
                     inputStream.close();
@@ -119,22 +132,50 @@ int a;
                 }
 
             }
+
             return null;
         }
 
         @Override
         protected void onPreExecute() {
         /*alertDialog=new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Login Status");
-*/
+        alertDialog.setTitle("Login Status");*/
+
         }
+
 
         @Override
         protected void onPostExecute(String aVoid) {
 
-                Toast.makeText(context,aVoid,Toast.LENGTH_LONG).show();
-            //alertDialog.setMessage(aVoid);
-            //alertDialog.show();
+
+
+            //int a=Integer.parseInt(aVoid);
+            switch (Integer.parseInt(aVoid))
+            {
+                case -1:alertDialog=new AlertDialog.Builder(context).create();
+                    alertDialog.setTitle("Login Status");
+                    alertDialog.setMessage("Invalid Password");
+                    alertDialog.show();
+                    break;
+                case  0:alertDialog=new AlertDialog.Builder(context).create();
+                    alertDialog.setTitle("Login Status");
+                    alertDialog.setMessage("Invalid User");
+                    alertDialog.show();
+                    break;
+                case 1: Intent intent=new Intent(context.getApplicationContext(),InputActivity.class);
+                    startActivity(intent);
+                    finish();
+                    break;
+            }
+            //Intent intent=new Intent(context,InputActivity.class);
+            //startActivity(intent);
+            /*if(a==1)
+            {Intent intent=new Intent(context,InputActivity.class);
+            startActivity(intent);}
+            else
+                Toast.makeText(context,"Error in login",Toast.LENGTH_LONG).show();*/
+            /*alertDialog.setMessage(aVoid);
+            alertDialog.show();*/
         }
 
         @Override
@@ -142,25 +183,38 @@ int a;
             super.onProgressUpdate(values);
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        e1=(EditText)findViewById(R.id.editText);
-        e2=(EditText)findViewById(R.id.editText2);
-        e3=(EditText)findViewById(R.id.editText3);
-        e4=(EditText)findViewById(R.id.editText4);
-        e5=(EditText)findViewById(R.id.editText5);
+        setContentView(R.layout.activity_login);
+        u=(EditText)findViewById(R.id.uname);
+        p=(EditText)findViewById(R.id.password);
+
+    }
+    public void Onlogin(View view) {
+        String uname = u.getText().toString();
+        String pass = p.getText().toString();
+        uname="\""+uname+"\"";
+        pass="\""+pass+"\"";
+        String type = "login";
+
+
+        Background1 bg1 = new Background1(this);
+        bg1.execute(type,uname,pass);
+
     }
 
-    public void Onreg(View view){
-        String s1 = e1.getText().toString();
-        String s2 = e2.getText().toString();
-        String s3 = e3.getText().toString();
-        String s4 = e4.getText().toString();
-        String s5 = e5.getText().toString();
-        String type = "register";
-        Background1 bg = new Background1(this);
-        bg.execute(type,s1,s2,s3,s4,s5);
+    public void Search(View view)
+    {
+        String str="123";
+        String type="search";
+        Background1 bg1 = new Background1(this);
+        bg1.execute(type,str);
+
+
+    }
+    public void OpenReg(View view){
+        startActivity(new Intent(this,RegisterActivity.class));
     }
 }

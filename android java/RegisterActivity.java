@@ -1,13 +1,11 @@
 package com.example.vinay.sqllogin;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -23,11 +21,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class LoginActivity extends AppCompatActivity {
-    EditText u,p;
-    Button lb;
-    int a;
-
+public class RegisterActivity extends AppCompatActivity {
+    EditText e1,e2,e3,e4,e5;
+int a;
     public class Background1 extends AsyncTask<String,Void,String> {
         Context context;
         AlertDialog alertDialog;
@@ -64,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                     {
                         result +=line;
                     }
-//                    a=Integer.parseInt(result);
+                    a=Integer.parseInt(result);
 
                     bufferedReader.close();
                     inputStream.close();
@@ -134,15 +130,8 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String aVoid) {
-            int a=Integer.parseInt(aVoid);
 
-            Intent intent=new Intent(context,InputActivity.class);
-            startActivity(intent);
-            /*if(a==1)
-            {Intent intent=new Intent(context,InputActivity.class);
-            startActivity(intent);}
-            else
-                Toast.makeText(context,"Error in login",Toast.LENGTH_LONG).show();*/
+                Toast.makeText(context,aVoid,Toast.LENGTH_LONG).show();
             //alertDialog.setMessage(aVoid);
             //alertDialog.show();
         }
@@ -152,24 +141,25 @@ public class LoginActivity extends AppCompatActivity {
             super.onProgressUpdate(values);
         }
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        u=(EditText)findViewById(R.id.uname);
-        p=(EditText)findViewById(R.id.password);
-
+        setContentView(R.layout.activity_registerold);
+        e1=(EditText)findViewById(R.id.editText);
+        e2=(EditText)findViewById(R.id.editText2);
+        e3=(EditText)findViewById(R.id.editText3);
+        e4=(EditText)findViewById(R.id.editText4);
+        e5=(EditText)findViewById(R.id.editText5);
     }
-    public void Onlogin(View view) {
-        String uname = u.getText().toString();
-        String pass = p.getText().toString();
-        String type = "login";
-        Background1 bg1 = new Background1(this);
-        bg1.execute(type,uname,pass);
 
-    }
-    public void OpenReg(View view){
-        startActivity(new Intent(this,RegisterActivity.class));
+    public void Onreg(View view){
+        String s1 = e1.getText().toString();
+        String s2 = e2.getText().toString();
+        String s3 = e3.getText().toString();
+        String s4 = e4.getText().toString();
+        String s5 = e5.getText().toString();
+        String type = "register";
+        Background1 bg = new Background1(this);
+        bg.execute(type,s1,s2,s3,s4,s5);
     }
 }
