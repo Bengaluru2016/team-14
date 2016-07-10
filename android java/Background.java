@@ -20,6 +20,9 @@ import java.net.URLEncoder;
 /**
  * Created by Vinay on 20-06-2016.
  */
+
+//This class handles background async task to ping a remote server and read a PHP echo
+
 public class Background extends AsyncTask<String,Void,String> {
     Context context;
     AlertDialog alertDialog;
@@ -73,11 +76,15 @@ public class Background extends AsyncTask<String,Void,String> {
         else if(type.equals("register")){
             try {
 
+	
+
                 String name= params[1];
                 String lname= params[2];
                 String age= params[3];
                 String username= params[4];
                 String password= params[5];
+
+	//Encode URL format
 
                 URL url = new URL(reg_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();

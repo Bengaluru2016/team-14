@@ -33,6 +33,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
+//Basic Android form for the survey to be taken at every location
+
 public class SurveyActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
     EditText e1,e2,e3,e4,e5,e6,e7;
     ImageView iv;

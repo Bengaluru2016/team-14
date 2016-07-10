@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+//Class to handle photo -- used to upload student photo taken during a survey
+
 public class CameraActivity extends Activity {
     private static final int CAMERA_REQUEST = 1888; 
     private ImageButton photoButton;
@@ -28,6 +30,7 @@ public class CameraActivity extends Activity {
         });
     }
 
+    //Get camera shoot data and paste it on the image button
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {  
             Bitmap photo = (Bitmap) data.getExtras().get("data"); 

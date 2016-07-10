@@ -21,6 +21,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
+//Activity for teachers to upload student progress reports
+
 public class RegisterActivity extends AppCompatActivity {
     EditText e1,e2,e3,e4,e5;
 int a;

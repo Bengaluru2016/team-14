@@ -21,6 +21,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
+//Activity for teachers to upload student progress and attendance
+
 public class ProgressActivity extends AppCompatActivity {
 
     AlertDialog alertDialog;

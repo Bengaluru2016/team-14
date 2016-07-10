@@ -1,6 +1,7 @@
 package com.example.survey;
-
 import java.util.ArrayList;
+
+//Auxiliary class to encode the EC2 server link with the URL parameter format
 
 public class URLPinger {
 	private static String baseUrl = "http://ec2-54-169-131-166.ap-southeast-1.compute.amazonaws.com/";

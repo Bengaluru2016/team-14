@@ -1,4 +1,7 @@
 <?php
+
+//PHP script to insert student ID while registering for a school
+
 require "conn.php";
 echo "here";
 $sid = $_GET["sid"];

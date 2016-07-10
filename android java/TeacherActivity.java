@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+//Intermediate screen for teachers
+
 public class TeacherActivity extends AppCompatActivity {
 
     @Override

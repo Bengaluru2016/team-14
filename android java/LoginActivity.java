@@ -25,6 +25,10 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
+//Login screen for employees and volunteers
+//This introductory screen allows users to login.
+//The type of employee (volunteer/manager) is stored remotely and is used to direct the user to authoritized appropriate actions
+
 public class LoginActivity extends AppCompatActivity {
     EditText u,p;
     Button lb;

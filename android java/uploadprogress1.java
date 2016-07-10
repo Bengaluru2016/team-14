@@ -6,15 +6,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
+
 public class uploadprogress1 extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-
         setContentView(R.layout.activity_uploadprogress1);
     }
 

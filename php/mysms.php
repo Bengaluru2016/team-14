@@ -1,3 +1,5 @@
+//PHP script to send a text SMS
+
 <html>
 <head>
 <title>Online PHP Script Execution</title>

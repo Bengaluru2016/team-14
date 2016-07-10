@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 
+//Intermediate screen -- Volunteers can start a survey and teachers can upload student progress
+
 public class MainActivity extends ActionBarActivity {
 
 	private Button startSurvey;

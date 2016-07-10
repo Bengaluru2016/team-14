@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+//Activity for teachers -- A teacher may either register a student or upload student performance for tracking progress
 
 public class Teacher1 extends Activity {
 

@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class InputActivity extends AppCompatActivity {
+//Module to handle the start of a survey -- This is the intermediate screen with two buttons
+//The user chooses an action here
 
+public class InputActivity extends AppCompatActivity {
 
     private Button startSurvey;
     private Button updateRecord;

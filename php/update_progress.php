@@ -5,6 +5,9 @@ $classin = $_POST["class"];
 $attendance = $_POST["attendance"];
 $performance = $_POST["performance"];
 
+//PHP interface to update student progress -- Marks, attendance, class of study
+//Also checks if the student has been missing -- 0 attendance and report missing
+
 echo $sid."<br>";
 echo $classin."<br>";
 echo $attendance."<br>";

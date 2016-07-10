@@ -1,4 +1,7 @@
 <?php
+
+//PHP script that returns the type of user given the username
+
 require "conn.php";
 $username = $_POST["username"];
 $pwd = $_POST["pwd"];

@@ -21,6 +21,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
+//Activity to the register a student to a school -- This is where we check if the student has been missing from the previous school
+
 public class StudentActivity extends AppCompatActivity {
 
     EditText e1,e2,e3,e4;
